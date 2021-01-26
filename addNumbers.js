@@ -127,9 +127,47 @@ function sortBestRatingsFirst(numbers){
     return numbers
 }
 
-console.log(sortBestRatingsFirst([5, 8, 2, 9, 3, 10]))
-console.log(sortBestRatingsFirst([9, 8, 1, 12, 3, 10]))
-console.log(sortBestRatingsFirst([5, 9, 8, 1, 12, 3, 10]))
+// console.log(sortBestRatingsFirst([5, 8, 2, 9, 3, 10]))
+// console.log(sortBestRatingsFirst([9, 8, 1, 12, 3, 10]))
+// console.log(sortBestRatingsFirst([5, 9, 8, 1, 12, 3, 10]))
 
 // Given a list of movies and their ratings
 // you need to sort the list in a descending order.
+
+function findMaxHelper(numbers) {
+    
+    let maximum = numbers[start];
+    let max_location = start
+
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] > maximum) {
+            maximum = numbers[i]
+            max_location = i
+        }
+    }
+    return {max_num: maximum, max_index: max_location}
+}
+
+// console.log(findMaxHelper([5, 2, 9, 3, 7], 3))
+
+function sortBestWithHelper(numbers){
+    //run as many times as there are items
+    for (let j = 0; j < numbers.length - 1; j++) {
+
+        // find max number and max location starting from j
+        max = findMax(numbers, j)
+        max_num = max['max_number']
+        max_location = max['max_index']
+
+
+        // swap the first and the max item in an array
+        numbers[max_location] = numbers[j]
+        numbers[j] = max_num
+    }
+
+    return numbers
+}
+
+console.log(sortBestRatingsFirst([5, 8, 2, 9, 3, 10]))
+console.log(sortBestRatingsFirst([9, 8, 1, 12, 3, 10]))
+console.log(sortBestRatingsFirst([5, 9, 8, 1, 12, 3, 10]))
